@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/UserContext";
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const { login } = useAuth(); // <-- usar o AuthContext
+  const { login } = useAuth();
+  const navigate = useNavigate()
 
   const [mensagem, setMensagem] = useState("");
   const [username, setUsername] = useState(""); 
@@ -12,7 +14,7 @@ export default function Login() {
     const result = await login(username, senha);
 
     if (result.success) {
-      setMensagem("Você logou com sucesso!");
+        navigate('/')
     } else {
       setMensagem("Usuário ou senha incorretos");
     }
