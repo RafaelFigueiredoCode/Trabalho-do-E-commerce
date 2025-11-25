@@ -1,47 +1,52 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useAuth } from "../contexts/UserContext";
 
-export default function Login(){
+export default function Login() {
+  const { login } = useAuth(); // <-- usar o AuthContext
 
-    const [mensagem, setMensagem] = useState("")
-    const [email, setEmail] = useState("")
-    const [senha, setSenha] = useState("")
+  const [mensagem, setMensagem] = useState("");
+  const [username, setUsername] = useState(""); 
+  const [senha, setSenha] = useState("");
 
-    function verificarLogin(){
+  async function verificarLogin() {
+    const result = await login(username, senha);
 
-        const emailCorreto = "teste@email"
-        const senhaCorreta = "1234"
-
-        if(emailCorreto === email && senhaCorreta === senha){
-            setMensagem("Você logou!")
-        }else{
-            setMensagem("Email ou senha incorretos")
-        }
-
+    if (result.success) {
+      setMensagem("Você logou com sucesso!");
+    } else {
+      setMensagem("Usuário ou senha incorretos");
     }
+  }
 
-    return(
-        <div>
-            <h2 style={{color: "#000"}}>Sistema login</h2>
+  return (  
+  
+  <div   
+  style={{
+    width: "300px",
+    marginLeft: "750px",
+  }}>
+  
+      <h2 style={{ color: "#000" }}>Sistema login</h2>
 
-            <input 
-                type="text"
-                placeholder="Digite o email"
-                onChange={(e)=>setEmail(e.target.value)}
-                value={email}
-            />
+      <input
+        type="text"
+        placeholder="Digite o username"
+        onChange={(e) => setUsername(e.target.value)}
+        value={username}
+      />
 
-            <input 
-                type="password"
-                placeholder="Digite a senha"
-                onChange={(e)=>setSenha(e.target.value)}
-                value={senha}
-            />
+      <input
+        type="password"
+        placeholder="Digite a senha"
+        onChange={(e) => setSenha(e.target.value)}
+        value={senha}
+      />
 
-            <p>
-            <button onClick={verificarLogin}>Entrar</button>
-            </p>
+      <p>
+        <button onClick={verificarLogin}>Entrar</button>
+      </p>
 
-            <p>{mensagem}</p>
-        </div>
-    )   
+      <p>{mensagem}</p>
+    </div>
+  );
 }
