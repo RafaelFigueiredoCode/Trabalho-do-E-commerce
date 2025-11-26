@@ -37,6 +37,7 @@ const styles = {
     flexDirection: "column",
     gap: "10px",
     transition: "0.2s",
+    cursor: "pointer"
   },
 
   image: {
