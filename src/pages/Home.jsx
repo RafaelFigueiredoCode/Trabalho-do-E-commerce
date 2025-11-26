@@ -15,6 +15,21 @@ export default function Home() {
         loadProducts();
     }, []);
 
+    const titleAnim = {
+        animation: "pop 0.6s ease",
+    };
+
+    const globalKeyframes = `
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+`;
+
+    document.head.insertAdjacentHTML("beforeend", `<style>${globalKeyframes}</style>`);
+
+
     return (
         <div style={styles.container}>
             <button
@@ -34,7 +49,19 @@ export default function Home() {
             >
                 Entrar na conta
             </button>
-            <h1 style={{ marginBottom: "20px" }}>Produtos</h1>
+            <h1 style={{
+                marginBottom: "25px",
+                fontSize: "50px",
+                fontWeight: "800",
+                textAlign: "center",
+                color: "#111",
+                letterSpacing: "2px",
+                ...titleAnim
+            }}>
+                Zóio Store
+            </h1>
+
+
 
             <div style={styles.grid}>
                 {products.map((product) => (
