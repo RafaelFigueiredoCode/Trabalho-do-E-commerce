@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import DetalhesProd from "./pages/DetalhesProd";
 import { AuthProvider, useAuth } from "./contexts/UserContext";
 
 function PrivateRoute({ children }) {
@@ -27,6 +28,10 @@ export default function App() {
                 <Dashboard />
               </PrivateRoute>
             }
+          />
+          <Route
+            path="/detalhes/:id"
+            element={<DetalhesProd />}
           />
         </Routes>
       </BrowserRouter>
