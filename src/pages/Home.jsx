@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import Card from "../components/cards";
 import { getProducts } from "../services/api";
+import { useNavigate } from 'react-router-dom';
 
 export default function Home(){
 
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(()=>{
         async function loadProducts() {
@@ -29,6 +31,7 @@ export default function Home(){
                     />
                 ))}
             </div>
+            <button onClick={() => navigate('/login')}>Entrar na conta</button>
         </div>
     )
 }
