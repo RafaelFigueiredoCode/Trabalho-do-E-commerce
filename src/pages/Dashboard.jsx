@@ -79,7 +79,7 @@ export default function Dashboard() {
       <p>{data}</p>
 
       <div style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "10px" }}>
-        <h2>Criar Produto</h2>
+        <h2 style={{marginBottom: '20px'}}>Criar Produto</h2>
 
         <input
           type="text"
@@ -101,7 +101,7 @@ export default function Dashboard() {
       </div>
 
       <div style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "10px" }}>
-        <h2>Apagar Produto</h2>
+        <h2 style={{marginBottom: '20px'}}>Apagar Produto</h2>
 
         <input
           type="number"
