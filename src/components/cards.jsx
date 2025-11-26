@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from "../contexts/CartContext";
+
 
 export default function Card({ product }) {
   const navigate = useNavigate();
@@ -28,6 +30,8 @@ export default function Card({ product }) {
       <p style={styles.price}>
         R$ {product.price}
       </p>
+      
+      <button onClick={() => addToCart(product)}>Adicionar ao Carrinho</button>
     </div>
   );
 }
