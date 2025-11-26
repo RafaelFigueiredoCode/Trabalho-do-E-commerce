@@ -1,39 +1,48 @@
 import { useState, useEffect } from "react";
 import Card from "../components/cards";
 import { getProducts } from "../services/api";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-export default function Home(){
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
-    const [products, setProducts] = useState([]);
-    const navigate = useNavigate()
+  useEffect(() => {
+    async function loadProducts() {
+      const data = await getProducts();
+      setProducts(data);
+    }
+    loadProducts();
+  }, []);
 
-    useEffect(()=>{
-        async function loadProducts() {
-            const data = await getProducts()
-            setProducts(data)
-        }
-        loadProducts()
-    }, []);
+  return (
+    <div style={styles.container}>
+      <button
+        onClick={() => navigate("/login")}
+        style={{
+          position: "fixed",
+          top: "20px",
+          right: "20px",
+          padding: "10px 20px",
+          backgroundColor: "#2196F3",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        Entrar na conta
+      </button>
+      <h1 style={{ marginBottom: "20px" }}>Produtos</h1>
 
-
-
-    
-    return(
-        <div style={styles.container}>
-            <h1>Produtos</h1>
-
-            <div style={styles.grid}>
-                {products.map((product) => (
-                    <Card
-                        key={product.id}
-                        product={product}
-                    />
-                ))}
-            </div>
-            <button onClick={() => navigate('/login')}>Entrar na conta</button>
-        </div>
-    )
+      <div style={styles.grid}>
+        {products.map((product) => (
+          <Card key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 const styles = {
