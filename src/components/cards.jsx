@@ -1,18 +1,29 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
-
+import { useAuth } from "../contexts/UserContext";
 
 export default function Card({ product }) {
   const navigate = useNavigate();
-  const [hover, setHover] = useState(false)
+  const [hover, setHover] = useState(false);
+  const { addToCart } = useCart();
+  const { user } = useAuth();
+
+  function handleAdd() {
+    if (!user) {
+      alert("Você precisa estar logado para usar o carrinho.");
+      navigate("/login");
+      return;
+    }
+    addToCart(product);
+  }
 
   return (
     <div
       onClick={() => navigate(`/detalhes/${product.id}`)}
-        style={{
-          ...styles.card, 
-          ...(hover ? styles.cardHover : {})
+      style={{
+        ...styles.card,
+        ...(hover ? styles.cardHover : {}),
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -20,22 +31,22 @@ export default function Card({ product }) {
       <p style={styles.title}> {product.title} </p>
 
       {product.image && (
-        <img
-          src={product.image}
-          alt={product.title}
-          style={styles.image}
-        />
+        <img src={product.image} alt={product.title} style={styles.image} />
       )}
 
-      <p style={styles.price}>
-        R$ {product.price}
-      </p>
-      
-      <button onClick={() => addToCart(product)}>Adicionar ao Carrinho</button>
+      <p style={styles.price}>R$ {product.price}</p>
+
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleAdd();
+        }}
+      >
+        Adicionar ao Carrinho
+      </button>
     </div>
   );
 }
-
 
 const styles = {
   card: {
