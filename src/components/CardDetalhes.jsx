@@ -2,55 +2,60 @@ export default function CardDetalhes({ product }) {
 
   return (
     <div style={styles.card}>
-      <p style={styles.title}> {product.title} </p>
+      
+      <h2 style={styles.title}>{product.title}</h2>
 
-      {product.image && (
-        <img
-          src={product.image}
-          alt={product.title}
-          style={styles.image}
-        />
-      )}
+      <img
+        src={product.image}
+        alt={product.title}
+        style={styles.image}
+      />
 
-      <p style={styles.price}>
-        R$ {product.price}
-      </p>
+      <p style={styles.price}>R$ {product.price}</p>
 
-      <p style={styles.price}>
-        Descrição: {product.description}
-      </p>
+      <p style={styles.description}>{product.description}</p>
+
     </div>
   );
 }
 
-
 const styles = {
   card: {
     backgroundColor: "#fff",
-    padding: "12px",
-    borderRadius: "10px",
+    padding: "30px",
+    borderRadius: "16px",
     border: "1px solid #ddd",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+    boxShadow: "0 4px 18px rgba(0,0,0,0.12)",
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    gap: "20px",
+    maxWidth: "700px",
+    width: "100%",
+    margin: "0 auto",
   },
 
   image: {
     width: "100%",
-    height: "160px",
+    height: "320px",
     objectFit: "contain",
   },
+
   title: {
-    fontSize: "14px",
-    fontWeight: "500",
-    height: "40px",
-    overflow: "hidden",
+    fontSize: "22px",
+    fontWeight: "700",
+    textAlign: "center",
+    color: "#222",
   },
-  price: {
+
+  description: {
     fontSize: "16px",
+    lineHeight: "1.5",
+    color: "#444",
+  },
+
+  price: {
+    fontSize: "20px",
     fontWeight: "bold",
-    marginTop: "auto",
+    color: "#111",
   },
 };
