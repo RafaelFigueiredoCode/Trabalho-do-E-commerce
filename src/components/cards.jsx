@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Card({ product }) {
   const navigate = useNavigate();
+  const [hover, setHover] = useState(false)
 
   return (
     <div
-    onClick={() => navigate(`/detalhes/${product.id}`)}
-      style={styles.card}
+      onClick={() => navigate(`/detalhes/${product.id}`)}
+        style={{
+          ...styles.card, 
+          ...(hover ? styles.cardHover : {})
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <p style={styles.title}> {product.title} </p>
 
@@ -36,8 +43,12 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
-    transition: "0.2s",
-    cursor: "pointer"
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    cursor: "pointer",
+  },
+  cardHover: {
+    transform: "scale(1.05)",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
   },
 
   image: {
@@ -45,14 +56,12 @@ const styles = {
     height: "160px",
     objectFit: "contain",
   },
-
   title: {
     fontSize: "14px",
     fontWeight: "500",
     height: "40px",
     overflow: "hidden",
   },
-
   price: {
     fontSize: "16px",
     fontWeight: "bold",
