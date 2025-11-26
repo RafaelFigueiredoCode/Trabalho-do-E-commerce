@@ -24,7 +24,7 @@ export default function Home() {
           top: "20px",
           right: "20px",
           padding: "10px 20px",
-          backgroundColor: "#2196F3",
+          backgroundColor: "#111",
           color: "white",
           border: "none",
           borderRadius: "5px",
