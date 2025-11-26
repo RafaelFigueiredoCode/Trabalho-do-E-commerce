@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Card from "../components/cards";
+import CardDetalhes from "../components/CardDetalhes";
 import { getProducts } from "../services/api";
 
 export default function DetalhesProd() {
@@ -28,8 +28,10 @@ export default function DetalhesProd() {
         <div style={styles.card}>
             <h2 style={{ color: "#000" }}>Detalhes do Produto</h2>
 
-            {/* Agora sim, um card só */}
-            <Card product={product} />
+            <CardDetalhes
+                key={product.id}
+                product={product}
+            />
 
             <button onClick={() => navigate(-1)}>Voltar</button>
         </div>
