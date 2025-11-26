@@ -19,12 +19,21 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
       <h1>Dashboard</h1>
-      <p>Bem-vindo, {user?.name}</p>
-
+      <p>Bem-vindo, {user?.username}</p>
+  
       <p>{data}</p>
-
+  
       <button onClick={logout}>Sair</button>
     </div>
   );
