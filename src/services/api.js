@@ -34,3 +34,14 @@ export async function deleteProduct(id) {
     return { error: true, message: err.message };
   }
 }
+
+export function getProtectedData() {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    return { message: "Dados protegidos acessados com sucesso!" };
+  } else {
+    throw new Error({ error: "Token inválido ou ausente" });
+  }
+}
+
