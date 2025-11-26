@@ -32,23 +32,26 @@ export default function Home() {
 
     return (
         <div style={styles.container}>
-            <button
-                onClick={() => navigate("/login")}
-                style={{
-                    position: "fixed",
-                    top: "20px",
-                    right: "20px",
-                    padding: "10px 20px",
-                    backgroundColor: "#111",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                }}
-            >
-                Entrar na conta
-            </button>
+            {products.length !== 0 ? (
+                <button
+                    onClick={() => navigate("/login")}
+                    style={{
+                        position: "fixed",
+                        top: "20px",
+                        right: "20px",
+                        padding: "10px 20px",
+                        backgroundColor: "#111",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                    }}
+                >
+                    Entrar na conta
+                </button>
+            ) : (<></>)}
+          
             <h1 style={{
                 marginBottom: "25px",
                 fontSize: "50px",
@@ -68,9 +71,11 @@ export default function Home() {
                     <Card key={product.id} product={product} />
                 ))}
             </div>
-            <footer style={styles.footer}>
-                &copy; {new Date().getFullYear()} Oficina Express - Todos os direitos reservados.
-            </footer>
+            {products.length !== 0 ? (
+                <footer style={styles.footer}>
+                    &copy; {new Date().getFullYear()} Oficina Express - Todos os direitos reservados.
+                </footer>
+            ) : (<></>)}
         </div>
     );
 }
