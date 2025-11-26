@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import DetalhesProd from "./pages/DetalhesProd";
 import { AuthProvider, useAuth } from "./contexts/UserContext";
 import CriarConta from "./pages/CriarLogin";
+import { CartProvider } from "./contexts/CartContext";
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -18,6 +19,7 @@ function PrivateRoute({ children }) {
 export default function App() {
   return (
     <AuthProvider>
+     <CartProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,6 +39,7 @@ export default function App() {
           />
         </Routes>
       </BrowserRouter>
+     </CartProvider>
     </AuthProvider>
   );
 }
