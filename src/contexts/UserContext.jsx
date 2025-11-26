@@ -17,6 +17,13 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
   function registerUser(username, password) {
     const users = JSON.parse(localStorage.getItem("customUsers")) || [];
   
