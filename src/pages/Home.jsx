@@ -44,30 +44,26 @@ export default function Home() {
   return (
     <div style={styles.container}>
       {products.length !== 0 ? (
-        <button
-          onClick={() => navigate("/login")}
-          style={{
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            padding: "10px 20px",
-            backgroundColor: "#111",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          Entrar na conta
-        </button>
+        <div>
+          <button
+            onClick={() => navigate("/login")}
+            style={{
+              position: "fixed",
+              top: "20px",
+              right: "20px",
+              padding: "10px 20px",
+            }}
+          >
+            Entrar na conta
+          </button>
+
+          <button onClick={handleOpenCart} style={styles.cartButton}>
+            Ver Carrinho
+          </button>
+        </div>
       ) : (
         <></>
       )}
-
-      <button onClick={handleOpenCart} style={styles.cartButton}>
-        Ver Carrinho
-      </button>
 
       <h1
         style={{

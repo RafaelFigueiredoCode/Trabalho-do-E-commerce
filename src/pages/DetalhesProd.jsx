@@ -59,7 +59,6 @@ const styles = {
 
     button: {
         padding: "12px 24px",
-        backgroundColor: "#111",
         color: "#fff",
         border: "none",
         borderRadius: "8px",
