@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import DetalhesProd from "./pages/DetalhesProd";
 import { AuthProvider, useAuth } from "./contexts/UserContext";
+import CriarConta from "./pages/CriarLogin";
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/criarConta" element={<CriarConta />} />
           <Route
             path="/dashboard"
             element={

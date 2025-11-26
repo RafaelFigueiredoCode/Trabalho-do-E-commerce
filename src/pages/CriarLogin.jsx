@@ -2,41 +2,28 @@ import { useState } from "react";
 import { useAuth } from "../contexts/UserContext";
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
-  const { login } = useAuth();
-  const navigate = useNavigate()
+export default function CriarConta() {
+  const navigate = useNavigate();
+  const { registerUser } = useAuth(); 
 
   const [mensagem, setMensagem] = useState("");
   const [username, setUsername] = useState(""); 
   const [senha, setSenha] = useState("");
 
-  async function verificarLogin() {
-    const result = await login(username, senha);
-  
+  async function handleCriarConta() {
+    const result = await registerUser(username, senha);
+
     if (result.success) {
-  
-      if (result.type === "api") {
-        navigate('/dashboard');   
-      }
-  
-      if (result.type === "local") {
-        navigate('/');
-      }
-  
+      // cadastro deu certo → vai para login
+      navigate('/login');
     } else {
-      setMensagem("Usuário ou senha incorretos");
+      setMensagem(result.message || "Erro ao criar conta");
     }
   }
 
-  return (  
-  
-  <div   
-  style={{
-    width: "300px",
-    marginLeft: "750px",
-  }}>
-  
-      <h2 style={{ color: "#000" }}>Sistema login</h2>
+  return (
+    <div style={{ width: "300px", marginLeft: "750px" }}>
+      <h2 style={{ color: "#000" }}>Criar Conta</h2>
 
       <input
         type="text"
@@ -53,10 +40,11 @@ export default function Login() {
       />
 
       <p>
-        <button onClick={verificarLogin}>Entrar</button>
+        <button onClick={handleCriarConta}>Criar Conta</button>
       </p>
+
       <p>
-        <button onClick={() => navigate('/criarConta')}>Criar Conta</button>
+        <button onClick={() => navigate('/login')}>Voltar para Login</button>
       </p>
 
       <p>{mensagem}</p>
