@@ -34,12 +34,14 @@ export default function Home(){
 }
 
 const styles = {
-    container: {
-        padding: "20px",
-    },
-    grid: {
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "20px",
-    },
+  container: {
+    padding: "20px",
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+    gap: "20px",
+  },
 };
