@@ -42,8 +42,8 @@ export default function Carrinho() {
           <h2 style={styles.total}>Total: R$ {total.toFixed(2)}</h2>
           <button
             style={styles.clearBtn}
-            onMouseOver={e => (e.currentTarget.style.background = "#222")}
-            onMouseOut={e => (e.currentTarget.style.background = "#444")}
+            onMouseOver={e => (e.currentTarget.style.background = "#4f46e5")}
+            onMouseOut={e => (e.currentTarget.style.background = "#6366f1")}
             onClick={clearCart}
           >
             Limpar carrinho
@@ -131,7 +131,7 @@ const styles = {
     cursor: "pointer",
     borderRadius: 6,
     fontWeight: "bold",
-    background: "#444",
+    background: "#6366f1",
     color: "#fff",
     marginTop: 10,
     transition: "0.2s",
