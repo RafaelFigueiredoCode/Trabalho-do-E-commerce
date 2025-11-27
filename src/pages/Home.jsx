@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import Card from "../components/cards";
 import { getProducts } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/UserContext";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     async function loadProducts() {
