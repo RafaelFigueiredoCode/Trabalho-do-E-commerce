@@ -50,9 +50,29 @@ export default function Carrinho() {
           </button>
 
           <button
-            style={styles.clearBtn}
-            onMouseOver={(e) => (e.currentTarget.style.background = "#4f46e5")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "#6366f1")}
+            style={{
+              all: "unset",
+              fontFamily: "inherit",
+              backgroundColor: "#000",
+              color: "#fff",
+              padding: "12px 18px",
+              borderRadius: "6px",
+              cursor: "pointer",
+              marginTop: "20px",
+              fontSize: "16px",
+              display: "block",
+              width: "200px",
+              textAlign: "center",
+              marginLeft: "auto",
+              marginRight: "auto",
+              transition: "0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#222";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#000";
+            }}
             onClick={() => navigate("/carrinho/pagamento")}
           >
             Comprar
@@ -140,7 +160,10 @@ const styles = {
     fontWeight: "bold",
     background: "#6366f1",
     color: "#fff",
-    marginTop: 10,
+    marginTop: 25,
+    marginBottom: 15,
     transition: "0.2s",
+    width: "200px",
+    alignSelf: "center",
   },
 };
