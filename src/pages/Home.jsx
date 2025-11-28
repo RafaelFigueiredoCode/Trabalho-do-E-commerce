@@ -4,8 +4,10 @@ import { getProducts } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/UserContext";
 import { useCart } from "../contexts/CartContext";
+import { useToast } from "../contexts/ToastContext";
 
 export default function Home() {
+  const { showToast } = useToast();
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -36,9 +38,16 @@ export default function Home() {
 
   function handleOpenCart() {
     if (!user) {
-      alert("Você precisa estar logado para acessar o carrinho.");
+      showToast({
+        severity: "warn",
+        summary: "Acesso restrito ⚠️",
+        detail: "Você precisa estar logado para acessar o carrinho.",
+        life: 2500,
+      });
+
       return navigate("/login");
     }
+
     navigate("/carrinho");
   }
 

@@ -8,6 +8,8 @@ import { AuthProvider, useAuth } from "./contexts/UserContext";
 import CriarConta from "./pages/CriarLogin";
 import { CartProvider } from "./contexts/CartContext";
 import Carrinho from './pages/Carrinho'
+import { ToastProvider } from "./contexts/ToastContext";
+
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -19,33 +21,39 @@ function PrivateRoute({ children }) {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/criarConta" element={<CriarConta />} />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/carrinho"
-              element={
-                <PrivateRoute>
-                  <Carrinho />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/detalhes/:id" element={<DetalhesProd />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/criarConta" element={<CriarConta />} />
+
+              <Route
+                path="/dashboard"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path="/carrinho"
+                element={
+                  <PrivateRoute>
+                    <Carrinho />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route path="/detalhes/:id" element={<DetalhesProd />} />
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </AuthProvider>
+    </ToastProvider>
   );
 }
+

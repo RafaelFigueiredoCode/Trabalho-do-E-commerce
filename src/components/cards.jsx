@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import { useAuth } from "../contexts/UserContext";
+import { useToast } from "../contexts/ToastContext";
+
 
 export default function Card({ product }) {
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const [hover, setHover] = useState(false);
   const { addToCart } = useCart();
@@ -11,8 +14,12 @@ export default function Card({ product }) {
 
   function handleAdd() {
     if (!user) {
-      alert("Você precisa estar logado para usar o carrinho.");
-      navigate("/login");
+      showToast({
+        severity: "warn",
+        summary: "Acesso restrito ⚠️",
+        detail: "Você precisa estar logado para acessar o carrinho.",
+        life: 2500,
+      });      navigate("/login");
       return;
     }
     addToCart(product);
