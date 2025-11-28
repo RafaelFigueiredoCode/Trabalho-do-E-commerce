@@ -63,3 +63,13 @@ body {
   background: #f5f6fa;
   color: #1a1a1a;
 }
+
+/* Impede que o estilo global de botão afete o logout */
+.logout-btn,
+.logout-btn:hover,
+.logout-btn:active {
+  background: transparent !important;
+  color: #444 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}

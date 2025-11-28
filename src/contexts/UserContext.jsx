@@ -17,12 +17,12 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedUser = localStorage.getItem("user");
+  //   if (savedUser) {
+  //     setUser(JSON.parse(savedUser));
+  //   }
+  // }, []);
 
   function registerUser(username, password) {
     const users = JSON.parse(localStorage.getItem("customUsers")) || [];
@@ -53,6 +53,8 @@ export function AuthProvider({ children }) {
   
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
+
+      setUser(user);
   
       return { success: true, type: "api" }; 
   
@@ -67,7 +69,8 @@ export function AuthProvider({ children }) {
       );
   
       if (foundUser) {
-        localStorage.setItem("user", JSON.stringify(foundUser));
+        localStorage.setItem("user", JSON.stringify(foundUser));  
+        setUser(foundUser)
         return { success: true, type: "local" };  // ← IMPORTANTE
       }
   
