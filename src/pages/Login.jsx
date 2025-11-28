@@ -1,27 +1,48 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/UserContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../contexts/ToastContext";
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
-  const [mensagem, setMensagem] = useState("");
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
   const [senha, setSenha] = useState("");
 
   async function verificarLogin() {
     const result = await login(username, senha);
 
     if (result.success) {
-      if (result.type === "api") navigate("/dashboard");
-      if (result.type === "local") navigate("/");
+      if (result.type === "api") {
+        showToast({
+          severity: "success",
+          summary: "Login via API",
+          detail: "Login realizado com sucesso!",
+        });
+        navigate("/dashboard");
+        return;
+      }
+
+      if (result.type === "local") {
+        showToast({
+          severity: "success",
+          summary: "Login Local",
+          detail: "Login realizado com sucesso!",
+        });
+
+        navigate("/");
+        return;
+      }
     } else {
-      setMensagem("Usuário ou senha incorretos");
+      showToast({
+        severity: "error",
+        summary: "Erro",
+        detail: "Usuário ou senha incorretos!",
+      });
     }
   }
-
-
 
   return (
     <div style={box}>
@@ -67,42 +88,40 @@ export default function Login() {
       >
         Criar nova conta
       </button>
-
-      <p style={{ marginTop: "15px", color: "red" }}>{mensagem}</p>
     </div>
   );
 }
 
-  // --- ESTILOS MAIS BONITOS ---
-  const box = {
-    width: "380px",
-    margin: "100px auto",
-    padding: "35px",
-    borderRadius: "16px",
-    background: "#fff",
-    border: "1px solid #e3e3e3",
-    boxShadow: "0px 10px 25px rgba(0,0,0,0.08)",
-    textAlign: "center",
-  };
+// --- ESTILOS ---
+const box = {
+  width: "380px",
+  margin: "100px auto",
+  padding: "35px",
+  borderRadius: "16px",
+  background: "#fff",
+  border: "1px solid #e3e3e3",
+  boxShadow: "0px 10px 25px rgba(0,0,0,0.08)",
+  textAlign: "center",
+};
 
-  const input = {
-    width: "100%",
-    padding: "12px",
-    marginBottom: "15px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    fontSize: "15px",
-    transition: "0.2s",
-  };
+const input = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "15px",
+  borderRadius: "8px",
+  border: "1px solid #ccc",
+  fontSize: "15px",
+  transition: "0.2s",
+};
 
-  const button = {
-    width: "100%",
-    padding: "12px",
-    marginBottom: "10px",
-    borderRadius: "8px",
-    border: "none",
-    cursor: "pointer",
-    fontWeight: "600",
-    fontSize: "15px",
-    transition: "0.2s",
-  };
+const button = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "10px",
+  borderRadius: "8px",
+  border: "none",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "15px",
+  transition: "0.2s",
+};

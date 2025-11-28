@@ -1,30 +1,39 @@
 import { useState } from "react";
 import { useAuth } from "../contexts/UserContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../contexts/ToastContext";
 
 export default function CriarConta() {
+  const { showToast } = useToast();
   const navigate = useNavigate();
-  const { registerUser } = useAuth(); 
+  const { registerUser } = useAuth();
 
-  const [mensagem, setMensagem] = useState("");
-  const [username, setUsername] = useState(""); 
+  const [username, setUsername] = useState("");
   const [senha, setSenha] = useState("");
 
   async function handleCriarConta() {
     const result = await registerUser(username, senha);
 
     if (result.success) {
+      showToast({
+        severity: "success",
+        summary: "Login Local",
+        detail: "Conta criada com sucesso!",
+      });
       // cadastro deu certo → vai para login
-      navigate('/login');
+      navigate("/login");
     } else {
-      setMensagem(result.message || "Erro ao criar conta");
-    }
+      showToast({
+        severity: "error",
+        summary: "Erro",
+        detail: "Erro ao criar conta!",
+      });    }
   }
 
   return (
-    <div style={box} >
+    <div style={box}>
       <h2 style={{ color: "#000", marginBottom: "20px" }}>Criar Conta</h2>
-  
+
       <input
         type="text"
         placeholder="Digite o username"
@@ -32,7 +41,7 @@ export default function CriarConta() {
         value={username}
         style={input}
       />
-  
+
       <input
         type="password"
         placeholder="Digite a senha"
@@ -40,7 +49,7 @@ export default function CriarConta() {
         value={senha}
         style={input}
       />
-  
+
       <button
         onClick={handleCriarConta}
         style={{
@@ -51,9 +60,9 @@ export default function CriarConta() {
       >
         Criar Conta
       </button>
-  
+
       <button
-        onClick={() => navigate('/login')}
+        onClick={() => navigate("/login")}
         style={{
           ...button,
           background: "#adacac",
@@ -63,42 +72,40 @@ export default function CriarConta() {
       >
         Voltar para Login
       </button>
-  
-      <p style={{ marginTop: "15px", color: "red" }}>{mensagem}</p>
     </div>
   );
 }
 
-  // --- ESTILOS MAIS BONITOS ---
-  const box = {
-    width: "380px",
-    margin: "100px auto",
-    padding: "35px",
-    borderRadius: "16px",
-    background: "#fff",
-    border: "1px solid #e3e3e3",
-    boxShadow: "0px 10px 25px rgba(0,0,0,0.08)",
-    textAlign: "center",
-  };
+// --- ESTILOS MAIS BONITOS ---
+const box = {
+  width: "380px",
+  margin: "100px auto",
+  padding: "35px",
+  borderRadius: "16px",
+  background: "#fff",
+  border: "1px solid #e3e3e3",
+  boxShadow: "0px 10px 25px rgba(0,0,0,0.08)",
+  textAlign: "center",
+};
 
-  const input = {
-    width: "100%",
-    padding: "12px",
-    marginBottom: "15px",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    fontSize: "15px",
-    transition: "0.2s",
-  };
+const input = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "15px",
+  borderRadius: "8px",
+  border: "1px solid #ccc",
+  fontSize: "15px",
+  transition: "0.2s",
+};
 
-  const button = {
-    width: "100%",
-    padding: "12px",
-    marginBottom: "10px",
-    borderRadius: "8px",
-    border: "none",
-    cursor: "pointer",
-    fontWeight: "600",
-    fontSize: "15px",
-    transition: "0.2s",
-  };
+const button = {
+  width: "100%",
+  padding: "12px",
+  marginBottom: "10px",
+  borderRadius: "8px",
+  border: "none",
+  cursor: "pointer",
+  fontWeight: "600",
+  fontSize: "15px",
+  transition: "0.2s",
+};

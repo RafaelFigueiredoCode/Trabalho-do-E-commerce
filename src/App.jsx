@@ -22,12 +22,13 @@ function PrivateRoute({ children }) {
 export default function App() {
   return (
     <ToastProvider>
+      
       <AuthProvider>
         <CartProvider>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login   />} />
               <Route path="/criarConta" element={<CriarConta />} />
 
               <Route
