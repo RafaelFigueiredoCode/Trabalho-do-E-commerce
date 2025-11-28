@@ -145,7 +145,7 @@ const styles = {
   userButton: {
     background: "#111",
     border: "1px solid #ddd",
-    padding: "6px 12px",
+    padding: "10px 20px",
     borderRadius: "8px",
     cursor: "pointer",
     fontSize: "14px",
