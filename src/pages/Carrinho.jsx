@@ -1,12 +1,11 @@
 import { useCart } from "../contexts/CartContext";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function Carrinho() {
   const { cart, removeFromCart, clearCart } = useCart();
+  const navigate = useNavigate();
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <div style={styles.container}>
@@ -16,7 +15,7 @@ export default function Carrinho() {
         <p style={styles.vazio}>Seu carrinho está vazio.</p>
       )}
 
-      {cart.map(item => (
+      {cart.map((item) => (
         <div key={item.id} style={styles.item}>
           <img src={item.image} style={styles.image} />
 
@@ -28,8 +27,8 @@ export default function Carrinho() {
 
           <button
             style={styles.removeBtn}
-            onMouseOver={e => (e.currentTarget.style.background = "#d93636")}
-            onMouseOut={e => (e.currentTarget.style.background = "#ff4040")}
+            onMouseOver={(e) => (e.currentTarget.style.background = "#d93636")}
+            onMouseOut={(e) => (e.currentTarget.style.background = "#ff4040")}
             onClick={() => removeFromCart(item.id)}
           >
             Remover
@@ -40,21 +39,29 @@ export default function Carrinho() {
       {cart.length > 0 && (
         <>
           <h2 style={styles.total}>Total: R$ {total.toFixed(2)}</h2>
+
           <button
             style={styles.clearBtn}
-            onMouseOver={e => (e.currentTarget.style.background = "#4f46e5")}
-            onMouseOut={e => (e.currentTarget.style.background = "#6366f1")}
+            onMouseOver={(e) => (e.currentTarget.style.background = "#4f46e5")}
+            onMouseOut={(e) => (e.currentTarget.style.background = "#6366f1")}
             onClick={clearCart}
           >
             Limpar carrinho
+          </button>
+
+          <button
+            style={styles.clearBtn}
+            onMouseOver={(e) => (e.currentTarget.style.background = "#4f46e5")}
+            onMouseOut={(e) => (e.currentTarget.style.background = "#6366f1")}
+            onClick={() => navigate("/carrinho/pagamento")}
+          >
+            Comprar
           </button>
         </>
       )}
     </div>
   );
 }
-
-
 
 const styles = {
   container: {

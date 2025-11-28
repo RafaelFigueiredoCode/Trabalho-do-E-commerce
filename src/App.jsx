@@ -7,9 +7,9 @@ import DetalhesProd from "./pages/DetalhesProd";
 import { AuthProvider, useAuth } from "./contexts/UserContext";
 import CriarConta from "./pages/CriarLogin";
 import { CartProvider } from "./contexts/CartContext";
-import Carrinho from './pages/Carrinho'
+import Carrinho from "./pages/Carrinho";
 import { ToastProvider } from "./contexts/ToastContext";
-
+import Pagamento from "./pages/Pagamento";
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -48,6 +48,15 @@ export default function App() {
                 }
               />
 
+              <Route
+                path="/carrinho/pagamento"
+                element={
+                  <PrivateRoute>
+                    <Pagamento />
+                  </PrivateRoute>
+                }
+              />
+
               <Route path="/detalhes/:id" element={<DetalhesProd />} />
             </Routes>
           </BrowserRouter>
@@ -56,4 +65,3 @@ export default function App() {
     </ToastProvider>
   );
 }
-
