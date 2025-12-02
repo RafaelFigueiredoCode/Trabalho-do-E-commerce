@@ -11,24 +11,35 @@ export default function CriarConta() {
   const [username, setUsername] = useState("");
   const [senha, setSenha] = useState("");
 
-  async function handleCriarConta() {
-    const result = await registerUser(username, senha);
-
-    if (result.success) {
-      showToast({
-        severity: "success",
-        summary: "Login Local",
-        detail: "Conta criada com sucesso!",
-      });
-      // cadastro deu certo → vai para login
-      navigate("/login");
-    } else {
-      showToast({
-        severity: "error",
-        summary: "Erro",
-        detail: "Erro ao criar conta!",
-      });    }
+async function handleCriarConta() {
+  if (!username.trim() || !senha.trim()) {
+    showToast({
+      severity: "warn",
+      summary: "Campos vazios",
+      detail: "Preencha todos os campos antes de criar a conta!",
+    });
+    return;
   }
+
+  const result = await registerUser(username, senha);
+
+  if (result.success) {
+    showToast({
+      severity: "success",
+      summary: "Conta criada",
+      detail: "Sua conta foi criada com sucesso!",
+    });
+
+    navigate("/login");
+  } else {
+    showToast({
+      severity: "error",
+      summary: "Erro",
+      detail: result.message || "Erro ao criar conta!",
+    });
+  }
+}
+
 
   return (
     <div style={box}>

@@ -11,38 +11,50 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [senha, setSenha] = useState("");
 
-  async function verificarLogin() {
-    const result = await login(username, senha);
+async function verificarLogin() {
 
-    if (result.success) {
-      if (result.type === "api") {
-        showToast({
-          severity: "success",
-          summary: "Login via API",
-          detail: "Login realizado com sucesso!",
-        });
-        navigate("/dashboard");
-        return;
-      }
-
-      if (result.type === "local") {
-        showToast({
-          severity: "success",
-          summary: "Login Local",
-          detail: "Login realizado com sucesso!",
-        });
-
-        navigate("/");
-        return;
-      }
-    } else {
-      showToast({
-        severity: "error",
-        summary: "Erro",
-        detail: "Usuário ou senha incorretos!",
-      });
-    }
+  // 🔒 VALIDAÇÃO: campos vazios
+  if (!username.trim() || !senha.trim()) {
+    showToast({
+      severity: "warn",
+      summary: "Campos vazios",
+      detail: "Preencha o usuário e a senha para continuar!",
+    });
+    return;
   }
+
+  const result = await login(username, senha);
+
+  if (result.success) {
+    if (result.type === "api") {
+      showToast({
+        severity: "success",
+        summary: "Login via API",
+        detail: "Login realizado com sucesso!",
+      });
+      navigate("/dashboard");
+      return;
+    }
+
+    if (result.type === "local") {
+      showToast({
+        severity: "success",
+        summary: "Login Local",
+        detail: "Login realizado com sucesso!",
+      });
+
+      navigate("/");
+      return;
+    }
+  } else {
+    showToast({
+      severity: "error",
+      summary: "Erro",
+      detail: "Usuário ou senha incorretos!",
+    });
+  }
+}
+
 
   return (
     <div style={box}>

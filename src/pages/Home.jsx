@@ -125,7 +125,7 @@ export default function Home() {
 
       {products.length !== 0 && (
         <footer style={styles.footer}>
-          &copy; {new Date().getFullYear()} Oficina Express - Todos os direitos
+          &copy; {new Date().getFullYear()} Zóio Store - Todos os direitos
           reservados.
         </footer>
       )}
