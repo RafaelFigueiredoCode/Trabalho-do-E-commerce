@@ -15,17 +15,25 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoverLogout, setHoverLogout] = useState(false);
 
-  // ANIMAÇÃO POP DO CARRINHO
+  // ANIMAÇÕES GLOBAIS
   const globalKeyframes = `
-  @keyframes popcart {
-    0% { transform: scale(1); }
-    40% { transform: scale(1.25); }
-    100% { transform: scale(1); }
-  }
-  `;
+@keyframes popcart {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+`;
+
+  const globalKeyframes2 = `
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+`;
+
   document.head.insertAdjacentHTML(
     "beforeend",
-    `<style>${globalKeyframes}</style>`
+    `<style>${globalKeyframes + globalKeyframes2}</style>`
   );
 
   useEffect(() => {
