@@ -17,12 +17,12 @@ export default function Home() {
 
   // ANIMAÇÃO POP DO CARRINHO
   const globalKeyframes = `
-@keyframes popcart {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.25); }
-  100% { transform: scale(1); }
-}
-`;
+  @keyframes popcart {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+  }
+  `;
   document.head.insertAdjacentHTML(
     "beforeend",
     `<style>${globalKeyframes}</style>`
